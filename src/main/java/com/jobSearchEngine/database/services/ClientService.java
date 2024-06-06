@@ -48,8 +48,4 @@ public class ClientService {
 
         return apiKey;
     }
-
-    public Optional<Client> findByAPIKey(String APIKey) {
-        return clientRepository.findByAPIKey(APIKey);
-    }
 }

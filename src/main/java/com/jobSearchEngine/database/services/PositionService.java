@@ -21,6 +21,7 @@ public class PositionService {
     private final PositionRepository positionRepository;
     private final ClientRepository clientRepository;
     private final LocationRepository locationRepository;
+    String url = "localhost:8080";
 
     @Autowired
     public PositionService(PositionRepository positionRepository, ClientRepository clientRepository, LocationRepository locationRepository) {
@@ -34,22 +35,25 @@ public class PositionService {
                 .orElseThrow(UnauthenticatedException::new);
 
         Optional<Location> loc = locationRepository.findByName(locationName);
-        Location location = loc.orElseGet(() -> new Location(locationName));
+        Location location = loc.orElseGet(() -> locationRepository.save(new Location(locationName)));
 
         Position p = new Position(name, location, client);
 
         p.setLocation(location);
         location.addPosition(p);
 
-        locationRepository.save(location);
         return PositionDTO.of(positionRepository.save(p));
+    }
+
+    public String createNewPositionAndGetURL(String APIKey, String name, String locationName) {
+        return url + "/position/" + createNewPosition(APIKey, name, locationName).getId();
     }
 
     public List<String> findPositionByNameLike(String APIKey, String name) {
         Client client = clientRepository.findByAPIKey(APIKey)
                 .orElseThrow(UnauthenticatedException::new);
         return positionRepository.findByClientAndNameLike(client.getId(), name)
-                .stream().map(p -> "localhost:8080/position/" + p.getId()).collect(Collectors.toList());
+                .stream().map(p -> url + "/position/" + p.getId()).collect(Collectors.toList());
     }
 
     public PositionDTO findPositionById(String APIKey, Long id) {

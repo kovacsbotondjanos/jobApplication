@@ -11,14 +11,14 @@ import java.util.Optional;
 
 public interface PositionRepository extends JpaRepository<Position, Long> {
     @Query(value = "SELECT p.* " +
-            "FROM position p " +
-            "INNER JOIN client c ON p.client_id = c.id " +
-            "WHERE p.name LIKE '%' || :name || '%' AND c.id = :clientId " +
-            "ORDER BY CASE " +
-            "           WHEN p.name LIKE :name || '%' THEN 1 " +
-            "           ELSE 2 " +
-            "         END",
-            nativeQuery = true)
+                    "FROM position p " +
+                    "INNER JOIN client c ON p.client_id = c.id " +
+                    "WHERE p.name LIKE '%' || :name || '%' AND c.id = :clientId " +
+                    "    ORDER BY CASE " +
+                    "       WHEN p.name LIKE :name || '%' THEN 1 " +
+                    "       ELSE 2 " +
+                    "    END",
+                    nativeQuery = true)
     List<Position> findByClientAndNameLike(@Param("clientId") Long clientId,@Param("name") String name);
     Optional<Position> findByClientAndId(Client client, Long id);
 }
