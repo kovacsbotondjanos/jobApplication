@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Location {
     private Long id;
     private String name;
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Position> positions;
+    private List<Position> positions = new ArrayList<>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
@@ -38,5 +39,13 @@ public class Location {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    public Location(String name) {
+        this.name = name;
+    }
+
+    public void addPosition(Position position) {
+        this.positions.add(position);
     }
 }

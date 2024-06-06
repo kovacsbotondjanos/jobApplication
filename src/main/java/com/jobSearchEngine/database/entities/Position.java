@@ -19,8 +19,9 @@ public class Position {
     private Long id;
     private String name;
     @ManyToOne
-//    @JoinColumn(name = "location_id")
     private Location location;
+    @ManyToOne
+    private Client client;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
@@ -38,5 +39,11 @@ public class Position {
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
+    }
+
+    public Position(String name, Location location, Client client) {
+        this.name = name;
+        this.location = location;
+        this.client = client;
     }
 }
