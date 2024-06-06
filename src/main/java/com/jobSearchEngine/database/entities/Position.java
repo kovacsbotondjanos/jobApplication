@@ -46,4 +46,8 @@ public class Position {
         this.location = location;
         this.client = client;
     }
+
+    public Position(String name) {
+        this.name = name;
+    }
 }

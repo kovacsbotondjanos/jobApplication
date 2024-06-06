@@ -1,6 +1,5 @@
 package com.jobSearchEngine.database.DTOs;
 
-import com.jobSearchEngine.database.entities.Client;
 import com.jobSearchEngine.database.entities.Location;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

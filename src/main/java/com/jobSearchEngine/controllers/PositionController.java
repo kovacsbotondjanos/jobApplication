@@ -25,13 +25,13 @@ public class PositionController {
     }
 
     @GetMapping("/search")
-    public List<String> searchPosition(@RequestParam(value = "API_KEY") String apiKey,
+    public List<String> searchPosition(@RequestHeader(value = "API_KEY") String apiKey,
                                        @RequestParam(value = "name") String name) {
         return positionService.findPositionByNameLike(apiKey, name);
     }
 
     @PostMapping
-    public String postPosition(@RequestParam(value = "API_KEY") String apiKey,
+    public String postPosition(@RequestHeader(value = "API_KEY") String apiKey,
                                @RequestParam(value = "name") String name,
                                @RequestParam(value = "location") String location) {
         return "localhost:8080/position/" + positionService.createNewPosition(apiKey, name, location).getId();

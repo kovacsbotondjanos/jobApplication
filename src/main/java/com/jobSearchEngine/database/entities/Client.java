@@ -49,4 +49,8 @@ public class Client {
         this.email = email;
         this.APIKey = APIKey;
     }
+
+    public void addPosition(Position pos) {
+        positions.add(pos);
+    }
 }
