@@ -7,6 +7,7 @@ import com.jobSearchEngine.database.entities.Position;
 import com.jobSearchEngine.database.repositories.ClientRepository;
 import com.jobSearchEngine.database.repositories.LocationRepository;
 import com.jobSearchEngine.database.repositories.PositionRepository;
+import com.jobSearchEngine.exceptions.InvalidFormDataException;
 import com.jobSearchEngine.exceptions.NotFoundException;
 import com.jobSearchEngine.exceptions.UnauthenticatedException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,14 @@ public class PositionService {
     public PositionDTO createNewPosition(String APIKey, String name, String locationName) {
         Client client = clientRepository.findByAPIKey(APIKey)
                 .orElseThrow(UnauthenticatedException::new);
+
+        if(name == null || name.isEmpty() || name.length() > 50) {
+            throw new InvalidFormDataException("Please provide a name with the correct length");
+        }
+
+        if(locationName == null || locationName.isEmpty() || locationName.length() > 50) {
+            throw new InvalidFormDataException("Please provide a location with the correct length");
+        }
 
         Optional<Location> loc = locationRepository.findByName(locationName);
         Location location = loc.orElseGet(() -> locationRepository.save(new Location(locationName)));
