@@ -7,10 +7,12 @@ import com.jobSearchEngine.database.entities.Position;
 import com.jobSearchEngine.database.repositories.ClientRepository;
 import com.jobSearchEngine.database.repositories.LocationRepository;
 import com.jobSearchEngine.database.repositories.PositionRepository;
+import com.jobSearchEngine.exceptions.NotFoundException;
 import com.jobSearchEngine.exceptions.UnauthenticatedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.NotActiveException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +63,6 @@ public class PositionService {
                 .orElseThrow(UnauthenticatedException::new);
 
         return PositionDTO.of(positionRepository.findByClientAndId(client, id)
-                                    .orElseThrow(UnauthenticatedException::new));
+                                    .orElseThrow(NotFoundException::new));
     }
 }

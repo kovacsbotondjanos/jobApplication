@@ -16,6 +16,13 @@ Validation errors:
   - InvalidFormDataException(http status: 422 UNPROCESSABLE_ENTITY)
   - UnauthenticatedException(http status: 401 UNAUTHORIZED)
 
+Endpoints:
+-
+- POST /client: accessible without api token, requires a name (String, less than 100 characters otherwise returns http status 422) and an email address(in valid format otherwise returns http status 422), if client with the same name or email exists then returns with http status 409
+- GET /position/:id: requires api key, returns the positionDTO if the client has a position with the same id, otherwise returns http status 404 if user doesn't have a position with the same id, if no api key was provided returns http status 401
+- GET /position/search: requires api key, returns a list of links, the first half of the list consists of elements where the beginning of the title matched, the last part consists of titles where the substring was found in the word, if no apiKey provided returns http status 401
+- POST /position: requires api key in the header, otherwise returns 401, else creates a new position, if a new location name was provided adds a new location to the location table too 
+
 Running the application:
 -
 - start: <b>mvn spring-boot:run</b> 
