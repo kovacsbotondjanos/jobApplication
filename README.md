@@ -43,6 +43,7 @@ Ideas for improvement:
 - 
 - Configure Spring security with sessions, so the client won't have to send the api key every single time
 - Add a password to the client so in the future they will be able to fetch the api key after logging in
+- Store the api key of the user more securely, maybe encode it with BCryptPasswordEncoder
 - Manage users and applications, CVs, cover letters, maybe some level of customization for the job listings, f.e. photos
 - Dockerize the application, create CI
 - Write more tcs, maybe some integration tcs
