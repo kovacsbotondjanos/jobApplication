@@ -1,5 +1,15 @@
 # jobApplication
 
+Technologies used:
+-
+- Java Spring Boot
+- Mockito for testing
+- Java faker for database seeder
+- Lombok
+- Swagger
+- Sqlite
+- JPA
+
 Database:
 -
 - sqlite database with jpa. 
@@ -35,3 +45,4 @@ Ideas for improvement:
 - Add a password to the client so in the future they will be able to fetch the api key after logging in
 - Manage users and applications, CVs, cover letters, maybe some level of customization for the job listings, f.e. photos
 - Dockerize the application, create CI
+- Write more tcs, maybe some integration tcs
