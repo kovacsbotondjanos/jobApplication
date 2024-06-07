@@ -35,7 +35,9 @@ Endpoints:
 
 Running the application:
 -
-- start: <b>mvn spring-boot:run</b> 
+- start:
+  - Windows: <b>.\run.ps1</b> 
+  - Linux: <b>./run.sh</b>
 - after starting the application the DatabaseSeeder class will check if the client table is empty. If yes then it will generate dummy data with faker.
 - swagger is available at http://localhost:8080/swagger-ui/index.html
 
