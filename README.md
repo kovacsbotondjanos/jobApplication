@@ -49,3 +49,4 @@ Ideas for improvement:
 - Manage users and applications, CVs, cover letters, maybe some level of customization for the job listings, f.e. photos
 - Dockerize the application, create CI
 - Write more tcs, maybe some integration tcs
+- Create rest of the CRUD endpoint
